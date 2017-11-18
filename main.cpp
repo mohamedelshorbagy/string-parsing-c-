@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include <iterator>
 #include <algorithm>
+#include <iterator>
 #include <cstring>
 #include <sstream>
 using namespace std;
@@ -26,7 +26,7 @@ int main() {
   string matrix[100];
   string names[100];
   size_t countSqaures = std::count(content.begin(),content.end() , ']');
-
+  bool shorbagy = false;
   for(int i = 0 ;i < countSqaures + 1;i++) {
 
     size_t found = content.find('[');
@@ -39,7 +39,10 @@ int main() {
       content.erase(0,content.find('=',content.find(']')) - 2);
       
       } else {
-        cout << "End Of Matrcies" << endl;
+
+        shorbagy = true;
+        
+
       }
 
 
@@ -48,61 +51,26 @@ int main() {
   }
 
 
-  std::istringstream f(content);
-  std::string operationLine;
-    int countMe = 0;
-  while(getline(f,operationLine)) {
-    cout << "Line Number : " << countMe << endl;
-    getString(operationLine);
-    countMe++;
-  }
 
   for(int i = 0 ;i < countSqaures;i++) {
-    matrix[i].erase(0,matrix[i].find('['));
+    // matrix[i].erase(0,matrix[i].find('['));
     matrix[i].erase(std::remove(matrix[i].begin(), matrix[i].end(), '\n'), matrix[i].end());
   }
 
 
-  for(int i = 0 ;i < countSqaures;i++) {
-    cout << matrix[i] << endl;
+  for(int i = 0 ; i < countSqaures;i++) {
+    implemetation(matrix[i]);
   }
-  
-    for(int i = 0 ;i < countSqaures;i++) {
-      cout << names[i] << endl;
-    }
 
 
 
-
-char * buffer = new char[content.length() + 1];
-  strcpy(buffer, content.c_str());
-
-  char * lineSeparators = ";";
-
-  char * line = strtok(buffer,lineSeparators);
-	
- while(line) {
-    string s;
-    for(int i = 0;i < strlen(line) + 1;i++) {
-      if(line[i] == ' ' || i == strlen(line)) {
-				if(s == "") {
-        	s = "";
-				} else {
-					cout << atof(s.c_str())<< endl;
-        	s = "";
-				}
-				continue;
-      } else if(line[i] == ']' || line[i] == '[') {
-				continue;
-			} else if(line[i] != ' ' || line[i] != NULL){
-        s += line[i];
-      }
-    }
-
+  std::istringstream f(content);
+  std::string operationLine;
+  while(getline(f,operationLine)) {
+    implemetation(operationLine);
     
-    counter++;
-     line = strtok(NULL,lineSeparators);
   }
+
 
 
 
