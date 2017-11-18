@@ -30,8 +30,6 @@ int main() {
   for(int i = 0 ;i < countSqaures + 1;i++) {
 
     size_t found = content.find('[');
-    // cout << found << endl;
-    // cout << content << endl;
       if(found != std::string::npos) {
       matrix[i] = content.substr(0,content.find(']') + 1);
       names[i] = matrix[i].substr(0,content.find('='));
@@ -75,56 +73,36 @@ int main() {
 
 
 
-// cout << content << endl;
-  // if(found == std::string::npos) {
-  //   cout << "Not found" << endl;
-  // } else {
-  //   cout << "found" << " =>  " << found  << "  - String Length " << s.length() << endl;
-  // }
 
+char * buffer = new char[content.length() + 1];
+  strcpy(buffer, content.c_str());
 
-// cout << matrix[0] << endl;
+  char * lineSeparators = ";";
 
-// cout << "Name of Matrix[0] " << names[0] << endl;
-
-
-// cout << "Number of [ " << countSqaures << endl;
-
-
-
-
-// int counter = 0;
-
-// char * buffer = new char[content.length() + 1];
-//   strcpy(buffer, content.c_str());
-
-//   char * lineSeparators = ";";
-
-//   char * line = strtok(buffer,lineSeparators);
+  char * line = strtok(buffer,lineSeparators);
 	
-//  while(line) {
-//     if(counter == 0) {
-//     string s;
-//     for(int i = 0;i < strlen(line) + 1;i++) {
-//       if(line[i] == ' ' || i == strlen(line)) {
-// 				if(s == "") {
-//         	s = "";
-// 				} else {
-// 					cout << atof(s.c_str())<< endl;
-//         	s = "";
-// 				}
-// 				continue;
-//       } else if(line[i] == ']' || line[i] == '[') {
-// 				continue;
-// 			} else if(line[i] != ' ' || line[i] != NULL){
-//         s += line[i];
-//       }
-//     }
+ while(line) {
+    string s;
+    for(int i = 0;i < strlen(line) + 1;i++) {
+      if(line[i] == ' ' || i == strlen(line)) {
+				if(s == "") {
+        	s = "";
+				} else {
+					cout << atof(s.c_str())<< endl;
+        	s = "";
+				}
+				continue;
+      } else if(line[i] == ']' || line[i] == '[') {
+				continue;
+			} else if(line[i] != ' ' || line[i] != NULL){
+        s += line[i];
+      }
+    }
 
-//     }
-//     counter++;
-//      line = strtok(NULL,lineSeparators);
-//   }
+    
+    counter++;
+     line = strtok(NULL,lineSeparators);
+  }
 
 
 
