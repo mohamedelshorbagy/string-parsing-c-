@@ -4,9 +4,15 @@
 #include <iterator>
 #include <algorithm>
 #include <cstring>
+#include <sstream>
 using namespace std;
 
 
+
+void getString(string s) {
+  
+  cout << s << endl;
+}
 
 
 
@@ -16,13 +22,9 @@ int main() {
   std::ifstream ifs("example.m");
   std::string content( (std::istreambuf_iterator<char>(ifs) ),
                        (std::istreambuf_iterator<char>()    ) );
-  int a = 0,b = 0;
+  
   string matrix[100];
   string names[100];
-  string operation[100];
-  int countMatrix = 0;
-  int countOperations = 0;
-
   size_t countSqaures = std::count(content.begin(),content.end() , ']');
 
   for(int i = 0 ;i < countSqaures + 1;i++) {
@@ -48,11 +50,14 @@ int main() {
   }
 
 
-  cout << content;
-
-
-  cout << "###############################################" << endl;
-  cout << "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$" << endl;
+  std::istringstream f(content);
+  std::string operationLine;
+    int countMe = 0;
+  while(getline(f,operationLine)) {
+    cout << "Line Number : " << countMe << endl;
+    getString(operationLine);
+    countMe++;
+  }
 
   for(int i = 0 ;i < countSqaures;i++) {
     matrix[i].erase(0,matrix[i].find('['));
@@ -64,6 +69,10 @@ int main() {
     cout << matrix[i] << endl;
   }
   
+    for(int i = 0 ;i < countSqaures;i++) {
+      cout << names[i] << endl;
+    }
+
 
 
 // cout << content << endl;
